@@ -1,0 +1,9 @@
+state("LEGOHarryPotter")
+{
+    bool isLoading: 0xA28510;
+}
+
+isLoading
+{
+    return current.isLoading;
+}
