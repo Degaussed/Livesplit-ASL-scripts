@@ -1,0 +1,22 @@
+state("iceage3")
+{
+    bool Crystals: 0x515E00; // Level Summary.
+    bool Prercs: 0x4FC978;   // Pre Rendered Cutscene.
+    bool Ingamecs: 0x624CA4; // seems broken, disable for now.
+    bool Footload: 0x518BF4; // Loading screen with... foot.
+}
+
+split
+{
+    return current.Crystals && !old.Crystals;
+}
+
+isLoading
+{
+    return current.Footload || current.Prercs || current.Ingamecs;
+}
+
+start
+{
+    return current.Prercs;
+}
