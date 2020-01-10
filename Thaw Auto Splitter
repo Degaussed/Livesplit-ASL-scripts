@@ -45,6 +45,11 @@ start
     return current.Map == "Z_HO" && current.GoalCount == 0;
 }
 
+reset
+{
+    return current.GoalCount == 0 && current.Map == "z_mainmenu";
+}
+
 isLoading
 {
     return current.isLoading;
