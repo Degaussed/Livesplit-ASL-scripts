@@ -1,0 +1,15 @@
+state("LEGOHarryPotter")
+{
+    bool isLoading: 0xA28510;
+    bool HarryHead: 0x00B1BA54, 0x18, 0x8, 0x80, 0x100, 0x770;
+}
+
+isLoading
+{
+    return current.isLoading;
+}
+
+split
+{
+    return current.HarryHead && !old.HarryHead;
+}
