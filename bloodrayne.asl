@@ -28,6 +28,11 @@ state("rayne1", "Steam / GOG 1.06")
     string12 map: 0x1B67460;
 }
 
+update
+{
+    //print("LEVEL " + current.map);
+}
+
 init
 {
 switch (modules.First().ModuleMemorySize) 
@@ -74,14 +79,20 @@ startup
 
 start
 {
-	if (old.IGT == 0 & current.IGT > 0)
-		return true;
+	if (old.IGT == 0 & current.IGT > 0 && current.map == "church.msn")
+        return true;
 }
 
 split
 {	
-	if (old.map != current.map)
-		return true;
+    if (old.map != current.map)
+    	return true;
+}
+
+reset
+{
+    if (current.IGT == 0 && current.map == "church.msn")
+        return true;
 }
 
 gameTime
