@@ -1,8 +1,8 @@
 state ("UO-Win64-Shipping", "v1.0.1") //81231872
 {
-    string100 level   : 0x04948798, 0x8B0, 0x14;      // Unicode String tracking the current loaded level
-    byte      idol    : 0x0493FB60, 0x0, 0x20, 0x768; // 4Byte value tracking the idols broken in LV_Stage_RGB
-    bool      loading : 0x49279C0;
+    string100 level   : 0x04948798, 0x8B0, 0x14;        // Unicode String tracking the current loaded level
+    byte      idol    : 0x049346D0, 0x30, 0x250, 0x768; // Byte value tracking the idols broken in LV_Stage_RGB
+    bool      loading : 0x444B878;
 }
 
 init
