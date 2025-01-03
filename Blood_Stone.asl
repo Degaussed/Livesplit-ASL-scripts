@@ -1,6 +1,6 @@
 state("bond", "elamigos repack") //17612800 
 {
-	bool load:        0x00F893D8, 0x24, 0x820; //Tracks loading
+    bool load:        0x00F893D8, 0x24, 0x820; //Tracks loading
     bool csload:      0x102C2D0;               //Remains true through any cutscene that also loads a level
     bool stinky:      0x007469D8, 0xC;         //Returns true when an in game cutscene is playing
     int trainObj:     0x0102BFF8, 0x3B4, 0xC, 0x10, 0xC60;
@@ -77,7 +77,7 @@ startup
         if (textSetting != null)
         textSetting.GetType().GetProperty("Text2").SetValue(textSetting, text);
     });
-	settings.Add("show_level", false, "Show Level");
+    settings.Add("show_level", false, "Show Level");
     settings.Add("show_load", false, "Show Loading");
     settings.Add("show_csload", false, "Show csloading");
     settings.Add("show_bink", false, "Show Bink");
