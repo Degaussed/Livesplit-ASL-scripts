@@ -31,11 +31,10 @@ startup
 
 update
 {
-    if (current.bags > old.bags)
     var bagCount = 0;
     for (int i = 0; i < 30; i++)
     {
-		if ((current.bags & (ulong)Math.Pow(2, i)) > 0)
+        if ((current.bags & (ulong)Math.Pow(2, i)) > 0)
 			bagCount++;
     }
     vars.BagsToString = bagCount.ToString();
