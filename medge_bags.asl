@@ -25,7 +25,7 @@ startup
         if (textSetting != null)
         textSetting.GetType().GetProperty("Text2").SetValue(textSetting, text);
     });
-	settings.Add("bag_count", true, "Bag Counter");
+    settings.Add("bag_count", true, "Bag Counter");
     settings.Add("bag_reset", false, "Reset Bags on New Game");
 }
 
@@ -67,7 +67,7 @@ update
     lpPtrPath = (IntPtr)BitConverter.ToInt32(lpReadBuf, 0);
     lpPtrPath = IntPtr.Add(lpPtrPath, 0x0);
 	
-	bSuccess = WinAPI.ReadProcessMemory(hProcess, lpPtrPath, lpReadBuf, nReadSize, out lpNumberOfBytesRead);
+    bSuccess = WinAPI.ReadProcessMemory(hProcess, lpPtrPath, lpReadBuf, nReadSize, out lpNumberOfBytesRead);
     lpPtrPath = (IntPtr)BitConverter.ToInt32(lpReadBuf, 0);
     lpPtrPath = IntPtr.Add(lpPtrPath, 0xC);
 
@@ -75,7 +75,7 @@ update
     lpPtrPath = (IntPtr)BitConverter.ToInt32(lpReadBuf, 0);
     lpPtrPath = IntPtr.Add(lpPtrPath, 0x74);
 	
-	bSuccess = WinAPI.ReadProcessMemory(hProcess, lpPtrPath, lpReadBuf, nReadSize, out lpNumberOfBytesRead);
+    bSuccess = WinAPI.ReadProcessMemory(hProcess, lpPtrPath, lpReadBuf, nReadSize, out lpNumberOfBytesRead);
     lpPtrPath = (IntPtr)BitConverter.ToInt32(lpReadBuf, 0);
     lpPtrPath = IntPtr.Add(lpPtrPath, 0x3C);
 
