@@ -78,29 +78,29 @@ update
     {
     bool bSuccess;
     IntPtr hProcess = game.Handle;
-	IntPtr lpPtrPath = IntPtr.Add(modules.First().BaseAddress, 0x00FAE574);
+    IntPtr lpPtrPath = IntPtr.Add(modules.First().BaseAddress, 0x00FAE574);
     byte[] lpBuffer = BitConverter.GetBytes((float)1);
     UIntPtr nSize = (UIntPtr)lpBuffer.Length;
     UIntPtr lpNumberOfBytesWritten = UIntPtr.Zero;
 	
     UIntPtr nReadSize = (UIntPtr)4;
-	byte[] lpReadBuf = new byte[4];
-	UIntPtr lpNumberOfBytesRead = UIntPtr.Zero;
+    byte[] lpReadBuf = new byte[4];
+    UIntPtr lpNumberOfBytesRead = UIntPtr.Zero;
 	
-	bSuccess = WinAPI.ReadProcessMemory(hProcess, lpPtrPath, lpReadBuf, nReadSize, out lpNumberOfBytesRead);
-	lpPtrPath = (IntPtr)BitConverter.ToInt32(lpReadBuf, 0);
-	lpPtrPath = IntPtr.Add(lpPtrPath, 0xC);
+    bSuccess = WinAPI.ReadProcessMemory(hProcess, lpPtrPath, lpReadBuf, nReadSize, out lpNumberOfBytesRead);
+    lpPtrPath = (IntPtr)BitConverter.ToInt32(lpReadBuf, 0);
+    lpPtrPath = IntPtr.Add(lpPtrPath, 0xC);
 	
-	bSuccess = WinAPI.ReadProcessMemory(hProcess, lpPtrPath, lpReadBuf, nReadSize, out lpNumberOfBytesRead);
-	lpPtrPath = (IntPtr)BitConverter.ToInt32(lpReadBuf, 0);
-	lpPtrPath = IntPtr.Add(lpPtrPath, 0xC);
+    bSuccess = WinAPI.ReadProcessMemory(hProcess, lpPtrPath, lpReadBuf, nReadSize, out lpNumberOfBytesRead);
+    lpPtrPath = (IntPtr)BitConverter.ToInt32(lpReadBuf, 0);
+    lpPtrPath = IntPtr.Add(lpPtrPath, 0xC);
 	
-	bSuccess = WinAPI.ReadProcessMemory(hProcess, lpPtrPath, lpReadBuf, nReadSize, out lpNumberOfBytesRead);
-	lpPtrPath = (IntPtr)BitConverter.ToInt32(lpReadBuf, 0);
-	lpPtrPath = IntPtr.Add(lpPtrPath, 0xB94);
+    bSuccess = WinAPI.ReadProcessMemory(hProcess, lpPtrPath, lpReadBuf, nReadSize, out lpNumberOfBytesRead);
+    lpPtrPath = (IntPtr)BitConverter.ToInt32(lpReadBuf, 0);
+    lpPtrPath = IntPtr.Add(lpPtrPath, 0xB94);
 	
     bSuccess = WinAPI.WriteProcessMemory(hProcess, lpPtrPath, lpBuffer, nSize, out lpNumberOfBytesWritten);
-	bSuccess = WinAPI.ReadProcessMemory(hProcess, lpPtrPath, lpReadBuf, nReadSize, out lpNumberOfBytesRead);
+    bSuccess = WinAPI.ReadProcessMemory(hProcess, lpPtrPath, lpReadBuf, nReadSize, out lpNumberOfBytesRead);
     float stamina = BitConverter.ToSingle(lpReadBuf, 0);
     //print(stamina.ToString());
 }}
