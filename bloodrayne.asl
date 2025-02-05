@@ -87,7 +87,7 @@ update
 
     //Debug bool
     lpBaseAddress = IntPtr.Add(modules.First().BaseAddress, 0x2C3BD8);
-    lpBuffer = new byte[] { 0 };
+    lpBuffer = new byte[] { 1 };
     lpNumberOfBytesWritten = UIntPtr.Zero;
     bSuccess = WinAPI.WriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, out lpNumberOfBytesWritten);
     }
