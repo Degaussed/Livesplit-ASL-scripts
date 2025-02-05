@@ -28,11 +28,6 @@ state("rayne1", "Steam / GOG 1.06")
     string12 map: 0x1B67460;
 }
 
-update
-{
-    //print("LEVEL " + current.map);
-}
-
 init
 {
 switch (modules.First().ModuleMemorySize) 
@@ -71,10 +66,31 @@ startup
             "Livesplit | BloodRayne",
             MessageBoxButtons.YesNo,MessageBoxIcon.Question
         );
-		if (response == DialogResult.Yes){
-			timer.CurrentTimingMethod = TimingMethod.GameTime;
+        if (response == DialogResult.Yes){
+            timer.CurrentTimingMethod = TimingMethod.GameTime;
 		}
+        }
+        settings.Add("givecheats", false, "Enable BloodRayne Debug Menu");
 }
+
+update
+{
+    if (settings["givecheats"])
+    {
+    //Extra Debug options
+    IntPtr hProcess = game.Handle;
+    IntPtr lpBaseAddress = IntPtr.Add(modules.First().BaseAddress, 0x3302CC);
+    byte[] lpBuffer = BitConverter.GetBytes((UInt32)4294967295);
+    UIntPtr nSize = (UIntPtr)lpBuffer.Length;
+    UIntPtr lpNumberOfBytesWritten = UIntPtr.Zero;
+    bool bSuccess = WinAPI.WriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, out lpNumberOfBytesWritten);
+
+    //Debug bool
+    lpBaseAddress = IntPtr.Add(modules.First().BaseAddress, 0x2C3BD8);
+    lpBuffer = new byte[] { 0 };
+    lpNumberOfBytesWritten = UIntPtr.Zero;
+    bSuccess = WinAPI.WriteProcessMemory(hProcess, lpBaseAddress, lpBuffer, nSize, out lpNumberOfBytesWritten);
+    }
 }
 
 start
