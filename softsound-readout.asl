@@ -1,8 +1,10 @@
 state ("MirrorsEdge", "Steam") //Taken from Toyro's Chapter Autosplitter
 {
-    float IGT : 0x01C553D0, 0xCC, 0x1CC, 0x2F8, 0x9C, 0xCC4, 0x368, 0x114;
+    float IGT : 0x01C2805C, 0x54, 0xBE8, 0x69C, 0xED4;
+    //float IGT : 0x01C553D0, 0xCC, 0x1CC, 0x2F8, 0x9C, 0xCC4, 0x368, 0x114; toyro's value is showing null sometimes
     string50 level : 0x01BF8B20, 0x3CC, 0x0;
-    string50 progress : 0x01B73F1C, 0xCC, 0x57C, 0x0;
+    string50 progAny : 0x01B73F1C, 0xCC, 0x578, 0x0;
+    string150 prog69 : 0x01B73F1C, 0xCC, 0x5DC, 0x0;
 }
 
 state ("MirrorsEdge", "Origin")
@@ -63,7 +65,6 @@ init
 // Weighted so the splits will only split forward, consecutively
 startup
 {
-    refreshRate = 62;
     vars.mm     = "TdMainMenu";
     vars.tut    = "tutorial_p";
     vars.levels = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
@@ -82,6 +83,7 @@ startup
     };
     vars.end  = "Scraper_p";
     settings.Add("bag_reset", false, "Reset Bags on New Game. Steam only");
+    settings.Add("69", false, "Shitty splitter for 69* so we can at least test it. disable if not running 69*.");
 }
 
 update
@@ -106,20 +108,23 @@ update
 
 split
 {
-    if (current.level == vars.mm || old.level == vars.mm) return false;
-    if (
-    vars.levels.ContainsKey(current.level) &&
-    vars.levels.ContainsKey(old.level) &&
-    vars.levels[current.level] == vars.levels[old.level] + 1) return true;
-    
-    //Condition for final split
-    if (current.level == "Scraper_p" && current.progress == "RunCompleted" && old.progress != current.progress)
-    return true;
+    //Conditions for final splits
+    if (current.level == "Scraper_p" && current.progAny == "RunCompleted" && old.progAny != current.progAny) return true;
+    if (current.level == "tt_ScraperB01_p" && current.prog69 == "69StarsCompleted" && old.prog69 != current.prog69) return true;
+    if (settings["69"] && current.level == vars.mm && old.level != vars.mm) return true;
+    if (current.level != vars.mm || old.level != vars.mm)
+        {
+        return
+        (vars.levels.ContainsKey(current.level) &&
+        vars.levels.ContainsKey(old.level) &&
+        vars.levels[current.level] == vars.levels[old.level] + 1);
+        }
 }
 
 start
 {
-    return current.level == vars.tut && old.level == vars.mm;
+    if (current.level == vars.tut && old.level == vars.mm) return true;
+    if (settings["69"] && current.level == "tt_TutorialA01_p" && old.level == "TdMainMenu") return true;
 }
 
 reset
