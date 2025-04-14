@@ -2,7 +2,7 @@ state ("MirrorsEdge", "Steam") //Taken from Toyro's Chapter Autosplitter
 {
     float IGT : 0x01C553D0, 0xCC, 0x1CC, 0x2F8, 0x9C, 0xCC4, 0x368, 0x114;
     string50 level : 0x01BF8B20, 0x3CC, 0x0;
-    string50 progress : 0x01C553D0, 0xCC, 0x560, 0x0;
+    string50 progress : 0x01B73F1C, 0xCC, 0x57C, 0x0;
 }
 
 state ("MirrorsEdge", "Origin")
@@ -66,7 +66,7 @@ startup
     refreshRate = 62;
     vars.mm     = "TdMainMenu";
     vars.tut    = "tutorial_p";
-    vars.levels = new Dictionary<string, int>()
+    vars.levels = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase)
     {
         {"TdMainMenu", 1},
         {"Edge_p", 2},
@@ -86,6 +86,7 @@ startup
 
 update
 {
+    //print("buh " + current.level);
     //Reset the bag counter to 0 when starting a new game (steam only)
     if (settings["bag_reset"] && current.level == vars.tut && old.level == vars.mm)
     {
@@ -112,7 +113,7 @@ split
     vars.levels[current.level] == vars.levels[old.level] + 1) return true;
     
     //Condition for final split
-    if (current.level == "Scraper_p" && current.progress == "AnyPercentCompleted" && old.progress != current.progress)
+    if (current.level == "Scraper_p" && current.progress == "RunCompleted" && old.progress != current.progress)
     return true;
 }
 
