@@ -25,7 +25,7 @@ startup
        		{"pel2", "Hard Landing"},
        		{"sniper", "Vendetta"},
        		{"see1", "Their Land, Their Blood"},
-			{"pel1a", "Burn 'em Out"},
+		{"pel1a", "Burn 'em Out"},
        		{"pel1b", "Relentless"},
        		{"see2", "Blood and Iron"},
        		{"ber1", "Ring of Steel"},
@@ -100,9 +100,9 @@ update
 	//massive shoutout to Ero for the help here. This is basically *adding* time to LiveSplits "loading times" which is then subtracting from RTA to display the time as LRT
 	//the string used originally does not exist in v1.1 - hek
 	if (settings["Cutscene Time Fix"] && 
-    ((version == "steam" && current.CurrentLevelName == "pel1a_load") || 
-     (version == "V1.1" && current.CurrentLevelName == "pel1a")) && 
-    old.CurrentLevelName == "see1")
+    	((version == "steam" && current.CurrentLevelName == "pel1a_load") || 
+     	(version == "V1.1" && current.CurrentLevelName == "pel1a")) && 
+    	old.CurrentLevelName == "see1")
 	{
 		print("CTF Executed Successfully");
 		const double Offset = 62.55;
